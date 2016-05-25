@@ -1,0 +1,19 @@
+{
+  "name": "meteor-accounts-facebook-accesstoken",
+  "version": "1.0.0",
+  "description": "Login service for Facebook  accounts using a directly-passed accessToken",
+  "main": "facebook.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heysailor/accounts-facebook-accesstoken.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heysailor/accounts-facebook-accesstoken/issues"
+  },
+  "homepage": "https://github.com/heysailor/accounts-facebook-accesstoken#readme"
+}
