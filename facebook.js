@@ -8,8 +8,6 @@
 // users actually get logged in to meteor via oauth.
 Accounts.registerLoginHandler(function (options) {
 
-  console.log(options.facebookAccessToken);
-
   if (!options.facebookAccessToken)
     return undefined; // don't handle
 
@@ -33,7 +31,6 @@ Accounts.registerLoginHandler(function (options) {
   try {
     // Verify token with facebook - ie, don't trust user supplied
     verifiedToken = getTokenDebugResponse(accessToken);
-    console.log('Verified token:', verifiedToken);
   } catch (e) {
     console.error(e);
     return { type: "facebookAccessToken",
@@ -44,9 +41,7 @@ Accounts.registerLoginHandler(function (options) {
 
   const result = getUserFacebookData(verifiedToken);
 
-  console.log('Result', result);
-
-  // return Accounts.updateOrCreateUserFromExternalService(result.serviceName, result.serviceData, result.options);
+  return Accounts.updateOrCreateUserFromExternalService(result.serviceName, result.serviceData, result.options);
 });
 
 // assumes verified accessToken
@@ -115,16 +110,13 @@ function getIdentity(accessToken, fields) {
 };
 
 const getTokenDebugResponse = function (accessToken) {
-  console.log('verifying');
   const config = ServiceConfiguration.configurations.findOne({service: 'facebook'});
-  console.log(config);
   if (!config)
     throw new ServiceConfiguration.ConfigError();
 
   let responseContent;
   try {
     // Debug the access token
-    console.log('sending req');
     responseContent = HTTP.get(
       "https://graph.facebook.com/debug_token", {
         params: {
